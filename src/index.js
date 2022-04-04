@@ -8,8 +8,6 @@ import { makeServer } from "./server";
 makeServer();
 
 ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
+    <App />,
   document.getElementById("root")
 );
