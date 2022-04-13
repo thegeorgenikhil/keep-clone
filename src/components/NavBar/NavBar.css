@@ -47,3 +47,8 @@
 .nav-link:hover {
   background-color: var(--color-off-gray);
 }
+
+.nav-right{
+  display: flex;
+  align-items: center;
+}

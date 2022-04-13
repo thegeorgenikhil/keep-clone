@@ -5,12 +5,12 @@ import MainInput from "./MainInput/MainInput";
 import "./Home.css";
 
 const MainPage = () => {
-  const [collapseMenu, setCollapseMenu] = useState(false);
+  const [collapse, setCollapse] = useState(false);
   return (
     <div>
-      <NavBar setCollapseMenu={setCollapseMenu} />
+      <NavBar setCollapse={setCollapse} />
       <div className="flex">
-        <SideBar collapseMenu={collapseMenu} />
+        <SideBar collapse={collapse} />
         <main className="main-container">
           <MainInput />
         </main>

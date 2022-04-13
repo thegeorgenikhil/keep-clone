@@ -55,15 +55,22 @@ body {
   border-radius: 3px;
   font-weight: 500;
   cursor: pointer;
+  margin: 0.5rem 0;
 }
 
 .auth-btn:hover {
   opacity: 0.9;
 }
 
-.auth-bottom-text{
+.auth-bottom-text {
   text-align: center;
   color: var(--color-secondary);
+}
+
+.loader-container {
+  display: flex;
+  width: 100%;
+  justify-content: center;
 }
 
 /* UTILITY CLASSES */
@@ -80,17 +87,31 @@ body {
   text-align: center;
 }
 
-.link{
+.link {
   text-decoration: none;
   color: var(--color-light-blue);
 }
 
-.divider-sm{
+.divider-sm {
   height: 1px;
   width: 100%;
   background-color: var(--color-off-gray);
   margin-top: 1rem;
   margin-bottom: 1rem;
+}
+
+.gray-text {
+  color: var(--color-dim-gray);
+}
+
+.btn-disabled {
+  opacity: 0.5;
+  pointer-events: none;
+  cursor: not-allowed;
+}
+
+.gap-10px {
+  gap: 10px;
 }
 
 @media screen and (max-width: 900px) {
