@@ -16,6 +16,7 @@ const Input = ({ name, type, changeHandler, placeholder, value }) => {
         onChange={changeHandler}
         placeholder={placeholder || ""}
         autoComplete="off"
+        required
       />
     </div>
   );

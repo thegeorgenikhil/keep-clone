@@ -1,18 +1,20 @@
 import React, { useState } from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import SideBar from "../../components/SideBar/SideBar";
-import MainInput from "./MainInput/MainInput";
 import "./Home.css";
+import { TipTap } from "../../components/TipTap/TipTap";
+import NotesContainer from "./NotesContainer/NotesContainer";
 
 const MainPage = () => {
-  const [collapseMenu, setCollapseMenu] = useState(false);
+  const [collapse, setCollapse] = useState(false);
   return (
     <div>
-      <NavBar setCollapseMenu={setCollapseMenu} />
+      <NavBar setCollapse={setCollapse} />
       <div className="flex">
-        <SideBar collapseMenu={collapseMenu} />
+        <SideBar collapse={collapse} />
         <main className="main-container">
-          <MainInput />
+          <TipTap />
+          <NotesContainer />
         </main>
       </div>
     </div>

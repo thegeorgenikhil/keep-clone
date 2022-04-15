@@ -1,10 +1,10 @@
-import React, { useState } from "react";
+import React from "react";
 import "./SideBar.css";
 import { MdLightbulbOutline, MdOutlineArchive } from "react-icons/md";
 import { FiTrash2 } from "react-icons/fi";
-const SideBar = ({ collapseMenu }) => {
+const SideBar = ({ collapse }) => {
   return (
-    <aside className={`sidebar ${collapseMenu ? "" : "collapse"}`}>
+    <aside className={`sidebar ${collapse ? "" : "collapse"}`}>
       <ul className="sidebar-group">
         <li className="sidebar-tab-container tab-active">
           <MdLightbulbOutline className="sidebar-icon" />

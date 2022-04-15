@@ -1,0 +1,43 @@
+.note {
+  border: 2px solid var(--color-off-gray);
+  border-radius: 8px;
+  background-color: var(--color-white);
+  padding: 1rem;
+}
+
+.note-title {
+  font-size: 1.2rem;
+  font-weight: 500;
+}
+
+.note-content {
+  margin-top: 1rem;
+  padding-bottom: 1rem;
+}
+
+.note:hover .notes-action-container {
+  opacity: 1;
+}
+
+.notes-action-container {
+  opacity: 0;
+  transition: all 0.3s;
+}
+
+.note-action-btn {
+  background-color: transparent;
+  border: none;
+  padding: 8px 10px;
+  border-radius: 100%;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.note-action-btn:hover {
+  background-color: var(--color-off-gray);
+}
+
+.note-action-icon {
+  font-size: 1.1rem;
+  color: var(--color-dim-gray);
+}
