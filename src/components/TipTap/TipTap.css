@@ -32,29 +32,6 @@
   font-weight: normal;
 }
 
-.menu-bar-btn {
-  background-color: transparent;
-  border: none;
-  padding: 8px 10px;
-  border-radius: 100%;
-  cursor: pointer;
-  transition: all 0.3s;
-}
-.menu-bar-btn:hover {
-  background-color: var(--color-off-gray);
-}
-
-.menu-bar-options-container {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.menu-bar-icon {
-  font-size: 1.1rem;
-  color: var(--color-dim-gray);
-}
-
 .content-input {
   font-size: 0.9rem;
 }
@@ -77,8 +54,4 @@
 
 .close-btn:hover {
   background-color: var(--color-off-gray);
-}
-
-.is_active {
-  color: #000000;
 }

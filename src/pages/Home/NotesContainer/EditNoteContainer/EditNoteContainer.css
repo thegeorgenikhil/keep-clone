@@ -1,0 +1,58 @@
+.notes-edit-container {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 3;
+}
+
+.notes-edit-blur {
+  background-color: var(--color-dark);
+  opacity: 0.5;
+  width: 100%;
+  height: 100%;
+}
+
+.note-edit-container {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -100%);
+  border: 2px solid var(--color-off-gray);
+  border-radius: 8px;
+  background-color: var(--color-white);
+  padding: 1rem;
+  width: 100%;
+  max-width: 40%;
+}
+
+.note-edit-container input{
+    border: none;
+    width: 100%;
+}
+
+.note-edit-container input:focus{
+    outline: none;
+}
+
+.note-edit-title{
+    font-size: 1.2rem;
+    font-weight: 600;
+    padding-bottom: 1rem;
+}
+
+.note-edit-content{
+    margin: 1rem 0 2rem 0;
+}
+
+.edit-note-action-container{
+  padding-top: 2rem;
+}
+
+@media screen and (max-width: 600px) {
+   .note-edit-container{
+       max-width: 70%;
+   }
+  }
+
