@@ -5,6 +5,7 @@
   background-color: var(--color-white);
   position: fixed;
   height: 100%;
+  z-index: 2;
 }
 
 .sidebar-group {
@@ -78,4 +79,7 @@
 }
 
 @media screen and (max-width: 600px) {
+  .sidebar{
+    display: none;
+  }
 }
