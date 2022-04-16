@@ -11,7 +11,7 @@ export const EditNoteTipTap = ({ setEditNote, editNoteContent }) => {
     onUpdate: ({ editor }) => {
       const html = editor.getHTML();
       setEditNote((editNote) => {
-        return { ...editNote, note: { ...editNote.note, content: html } };
+        return { ...editNote, content: html };
       });
     },
   });

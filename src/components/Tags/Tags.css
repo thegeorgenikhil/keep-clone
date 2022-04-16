@@ -1,0 +1,26 @@
+.tag-main-container{
+    display: flex;
+    gap: 5px;
+}
+
+.tags-container{
+    display: flex;
+    gap: 3px;
+}
+.tag-input{
+    border: none;
+    font-size: 0.7rem;
+    background-color: transparent;
+}
+
+.tag-input:focus{
+    outline: none;
+}
+
+.tag{
+    font-size: 0.7rem;
+    font-weight: 500;
+    background-color: var(--tag-bg-color);
+    padding: 0.4rem 0.6rem;
+    border-radius: 99px;
+}

@@ -1,30 +1,33 @@
 import React from "react";
-import {
-  MdOutlineColorLens,
-  MdOutlineArchive,
-  MdDeleteOutline,
-} from "react-icons/md";
+import { MdOutlineArchive, MdDeleteOutline } from "react-icons/md";
 import "./EditNoteContainer.css";
 import { EditNoteTipTap } from "../EditNoteTipTap/EditNoteTipTap";
 import { useUser } from "../../../../context/UserContext";
+import ColorPalette from "../../../../components/ColorPalette/ColorPalette";
+import Tags from "../../../../components/Tags/Tags";
 
-const EditNoteContainer = ({ setEditNote, editNote }) => {
-  const {
-    note: { title },
-  } = editNote;
+const EditNoteContainer = ({ setEditNote, editNote, setIsEdit }) => {
+  const { title } = editNote;
   const { updateUserNote } = useUser();
 
   const closeHandler = async () => {
-    await updateUserNote(editNote.note);
-    setEditNote({ isEdit: false, note: {} });
+    await updateUserNote(editNote);
+    setIsEdit(false);
+    setEditNote({});
   };
   return (
     <div className="notes-edit-container">
       <div
         className="notes-edit-blur"
-        onClick={() => setEditNote({ isEdit: false, note: {} })}
+        onClick={() => {
+          setIsEdit(false);
+          setEditNote({});
+        }}
       ></div>
-      <div className="note-edit-container">
+      <div
+        className="note-edit-container"
+        style={{ backgroundColor: editNote.color }}
+      >
         <div className="note-main-container">
           <div>
             <input
@@ -34,20 +37,21 @@ const EditNoteContainer = ({ setEditNote, editNote }) => {
               onChange={(e) =>
                 setEditNote({
                   ...editNote,
-                  note: { ...editNote.note, title: e.target.value },
+                  title: e.target.value,
                 })
               }
             />
           </div>
           <EditNoteTipTap
             setEditNote={setEditNote}
-            editNoteContent={editNote.note.content}
+            editNoteContent={editNote.content}
           />
         </div>
+        <div className="mt-1">
+          <Tags tags={editNote.tags} setNote={setEditNote} />
+        </div>
         <div className="edit-note-action-container">
-          <button className="note-action-btn">
-            <MdOutlineColorLens className="menu-bar-icon" />
-          </button>
+          <ColorPalette setUserNote={setEditNote} />
           <button className="note-action-btn">
             <MdOutlineArchive className="note-action-icon" />
           </button>

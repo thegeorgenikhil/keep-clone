@@ -22,6 +22,7 @@
 .notes-action-container {
   opacity: 0;
   transition: all 0.3s;
+  margin-top: 1rem;
 }
 
 .note-action-btn {
