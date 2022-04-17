@@ -5,13 +5,17 @@ import Placeholder from "@tiptap/extension-placeholder";
 import React, { useState } from "react";
 import "./TipTap.css";
 import MenuBar from "./MenuBar/MenuBar";
+import Tags from "../Tags/Tags";
 
 export const TipTap = () => {
   const [isUserOnInput, setIsUserOnInput] = useState(false);
   const [userNote, setUserNote] = useState({
     title: "",
-    content: "Enter note here....",
+    content: "",
+    tags: [],
+    color: "#ffffff",
   });
+
   const editor = useEditor({
     extensions: [
       StarterKit,
@@ -20,7 +24,7 @@ export const TipTap = () => {
       }),
       Underline,
     ],
-    content: userNote.content,
+    content: "",
     onUpdate: ({ editor }) => {
       const html = editor.getHTML();
       setUserNote((userNote) => ({ ...userNote, content: html }));
@@ -28,7 +32,7 @@ export const TipTap = () => {
   });
 
   return (
-    <div className="text-editor">
+    <div className="text-editor" style={{ backgroundColor: userNote.color }}>
       <input
         placeholder={isUserOnInput ? "Title" : "Take a note..."}
         className="take-a-note-input"
@@ -39,6 +43,7 @@ export const TipTap = () => {
       {isUserOnInput && (
         <>
           <EditorContent editor={editor} className="content-input" />
+          <Tags tags={userNote.tags} setNote={setUserNote} />
           <MenuBar
             editor={editor}
             userNote={userNote}

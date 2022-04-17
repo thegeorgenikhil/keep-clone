@@ -12,6 +12,8 @@
   --color-light-blue: #1a73e8;
 
   --auth-btn-color: #fbbc04;
+  --tag-bg-color: #ebebeb;
+  --tag-text-color: #b9b0ad;
 }
 
 * {
@@ -80,6 +82,10 @@ body {
   display: flex;
 }
 
+.flex-col{
+  flex-direction: column;
+}
+
 .items-center {
   align-items: center;
 }
@@ -113,6 +119,10 @@ body {
 
 .gap-10px {
   gap: 10px;
+}
+
+.mt-1{
+  margin-top: 1rem;
 }
 
 @media screen and (max-width: 900px) {

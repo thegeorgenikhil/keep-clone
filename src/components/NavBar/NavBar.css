@@ -48,7 +48,21 @@
   background-color: var(--color-off-gray);
 }
 
+.no-hover:hover{
+  background-color: transparent;
+}
+
 .nav-right{
   display: flex;
   align-items: center;
+}
+
+.date-sort-btn{
+  display: flex;
+  align-items: center;
+  background-color: transparent;
+  border: 2px solid var(--color-off-gray);
+  padding: 0.5rem;
+  border-radius: 5px;
+  cursor: pointer;
 }

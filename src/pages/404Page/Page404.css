@@ -1,0 +1,32 @@
+.img-404-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.img-404 {
+  width: 100%;
+  max-width: 30%;
+}
+
+.title-404 {
+  font-size: 3rem;
+  color: var(--color-dim-gray);
+  margin-top: 1rem;
+}
+.content-404 {
+  font-size: 1.2rem;
+  color: var(--color-dim-gray);
+}
+
+.back-to-home-btn{
+    background-color: var(--auth-btn-color);
+    color: var(--color-white);
+    padding: 0.75rem 1rem;
+    margin-top: 1rem;
+    border-radius: 3px;
+}
+
+.back-to-home-btn:hover{
+    opacity: 0.9;
+}

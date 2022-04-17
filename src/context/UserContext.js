@@ -1,6 +1,10 @@
 import React, { createContext, useContext, useEffect, useReducer } from "react";
 import { actionTypes } from "../reducers/actionTypes";
 import { userNotesReducer } from "../reducers/userNotesReducer";
+import { addToArchive } from "../services/archive-services/addToArchive";
+import { deleteFromArchive } from "../services/archive-services/deleteFromArchive";
+import { getArchiveNotes } from "../services/archive-services/getArchiveNotes";
+import { restoreNote } from "../services/archive-services/restoreNote";
 import {
   addNote,
   getNotes,
@@ -9,7 +13,8 @@ import {
 } from "../services/note-services";
 import { useAuth } from "./AuthContext";
 
-const { SET_USER_NOTES } = actionTypes;
+const { SET_USER_NOTES, SET_ARCHIVE_NOTES, SET_NOTES_AND_ARCHIVE_NOTES } =
+  actionTypes;
 
 const UserContext = createContext();
 
@@ -19,6 +24,8 @@ export const UserProvider = ({ children }) => {
   } = useAuth();
   const [userNoteState, userNoteDispatch] = useReducer(userNotesReducer, {
     notes: [],
+    archives: [],
+    dateSort: "ASC",
   });
 
   const getUserNotesOnInitialLoad = async (isAuthenticated, token) => {
@@ -42,8 +49,7 @@ export const UserProvider = ({ children }) => {
     try {
       const userNote = {
         ...note,
-        tags: [],
-        color: "#FFFFFF",
+        date: new Date(),
       };
       const res = await addNote(userNote, token);
       const data = await res.data;
@@ -88,8 +94,71 @@ export const UserProvider = ({ children }) => {
     }
   };
 
+  const getUserArchiveNotes = async (isAuthenticated, token) => {
+    try {
+      if (isAuthenticated) {
+        const res = await getArchiveNotes(token);
+        const data = await res.data;
+        if (data.archives) {
+          userNoteDispatch({
+            type: SET_ARCHIVE_NOTES,
+            payload: { archives: data.archives },
+          });
+        }
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const addUserNoteToArchive = async (note, token) => {
+    try {
+      const res = await addToArchive(note, token);
+      const data = await res.data;
+      if (data.archives && data.notes) {
+        userNoteDispatch({
+          type: SET_NOTES_AND_ARCHIVE_NOTES,
+          payload: { archives: data.archives, notes: data.notes },
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const restoreUserNoteFromArchive = async (noteId, token) => {
+    try {
+      const res = await restoreNote(noteId, token);
+      const data = res.data;
+      if (data.notes && data.archives) {
+        userNoteDispatch({
+          type: SET_NOTES_AND_ARCHIVE_NOTES,
+          payload: { archives: data.archives, notes: data.notes },
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const deleteUserNoteFromArchive = async (noteId, token) => {
+    try {
+      const res = await deleteFromArchive(noteId, token);
+      const data = await res.data;
+      if (data.archives) {
+        userNoteDispatch({
+          type: SET_ARCHIVE_NOTES,
+          payload: { archives: data.archives },
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   useEffect(() => {
     getUserNotesOnInitialLoad(isAuthenticated, token);
+    getUserArchiveNotes(isAuthenticated, token);
   }, [isAuthenticated, token]);
   return (
     <UserContext.Provider
@@ -99,6 +168,9 @@ export const UserProvider = ({ children }) => {
         addUserNote,
         updateUserNote,
         deleteUserNote,
+        addUserNoteToArchive,
+        restoreUserNoteFromArchive,
+        deleteUserNoteFromArchive,
       }}
     >
       {children}

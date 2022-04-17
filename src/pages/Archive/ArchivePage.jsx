@@ -1,11 +1,9 @@
-import React, { useState,useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import NavBar from "../../components/NavBar/NavBar";
 import SideBar from "../../components/SideBar/SideBar";
-import "./Home.css";
-import { TipTap } from "../../components/TipTap/TipTap";
-import NotesContainer from "./NotesContainer/NotesContainer";
+import ArchiveContainer from "./ArchiveContainer/ArchiveContainer";
 
-const MainPage = () => {
+const ArchivePage = () => {
   const [collapse, setCollapse] = useState(false);
   useEffect(() => {
     setCollapse(false);
@@ -16,12 +14,11 @@ const MainPage = () => {
       <div className="flex">
         <SideBar collapse={collapse} />
         <main className="main-container">
-          <TipTap />
-          <NotesContainer />
+          <ArchiveContainer />
         </main>
       </div>
     </div>
   );
 };
 
-export default MainPage;
+export default ArchivePage;

@@ -1,19 +1,15 @@
 import React from "react";
-import {
-  MdOutlineColorLens,
-  MdOutlineArchive,
-  MdDeleteOutline,
-} from "react-icons/md";
+import { MdOutlineArchive, MdDeleteOutline } from "react-icons/md";
 import parse from "html-react-parser";
 import { useUser } from "../../../../context/UserContext";
 import { useAuth } from "../../../../context/AuthContext";
 import "./Note.css";
 
-const Note = ({ note, setEditNote }) => {
+const Note = ({ note, setEditNote, setIsEdit }) => {
   const {
     auth: { isAuthenticated, token },
   } = useAuth();
-  const { deleteUserNote } = useUser();
+  const { deleteUserNote, addUserNoteToArchive } = useUser();
 
   const noteDeleteHandler = async (id) => {
     if (isAuthenticated) {
@@ -23,20 +19,36 @@ const Note = ({ note, setEditNote }) => {
       await deleteUserNote(id, token);
     }
   };
+
+  const archiveClickHandler = async (note, token) => {
+    await addUserNoteToArchive(note, token);
+  };
   return (
-    <div className="note">
+    <div className="note" style={{ backgroundColor: note.color }}>
       <div
         className="note-main-container"
-        onClick={() => setEditNote({ isEdit: true, note: note })}
+        onClick={() => {
+          setIsEdit(true);
+          setEditNote({ ...note });
+        }}
       >
         <div className="note-title">{note.title}</div>
         <div className="note-content">{parse(note.content)}</div>
+        <div className="tags-container">
+          {note.tags.map((tag, index) => {
+            return (
+              <span key={index} className="tag">
+                {tag}
+              </span>
+            );
+          })}
+        </div>
       </div>
       <div className="notes-action-container">
-        <button className="note-action-btn">
-          <MdOutlineColorLens className="menu-bar-icon" />
-        </button>
-        <button className="note-action-btn">
+        <button
+          className="note-action-btn"
+          onClick={() => archiveClickHandler(note, token)}
+        >
           <MdOutlineArchive className="note-action-icon" />
         </button>
         <button

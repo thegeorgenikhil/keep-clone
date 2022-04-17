@@ -22,6 +22,7 @@
 .notes-action-container {
   opacity: 0;
   transition: all 0.3s;
+  margin-top: 1rem;
 }
 
 .note-action-btn {
@@ -40,4 +41,10 @@
 .note-action-icon {
   font-size: 1.1rem;
   color: var(--color-dim-gray);
+}
+
+@media screen and (max-width: 600px) {
+  .notes-action-container {
+    opacity: 1;
+  }
 }

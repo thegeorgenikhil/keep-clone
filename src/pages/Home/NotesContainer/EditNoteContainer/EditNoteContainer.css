@@ -40,6 +40,7 @@
     font-size: 1.2rem;
     font-weight: 600;
     padding-bottom: 1rem;
+    background-color: transparent;
 }
 
 .note-edit-content{
@@ -47,7 +48,8 @@
 }
 
 .edit-note-action-container{
-  padding-top: 2rem;
+  padding-top: 1rem;
+  display: flex;
 }
 
 @media screen and (max-width: 600px) {

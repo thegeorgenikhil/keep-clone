@@ -5,11 +5,10 @@ import {
   MdOutlineRedo,
   MdFormatUnderlined,
   MdUndo,
-  MdOutlineColorLens,
-  MdOutlineLabel,
 } from "react-icons/md";
 import { useAuth } from "../../../context/AuthContext";
 import { useUser } from "../../../context/UserContext";
+import ColorPalette from "../../ColorPalette/ColorPalette";
 import "./MenuBar.css";
 
 const MenuBar = ({ editor, userNote, setIsUserOnInput, setUserNote }) => {
@@ -19,14 +18,20 @@ const MenuBar = ({ editor, userNote, setIsUserOnInput, setUserNote }) => {
   } = useAuth();
   const closeHandler = async () => {
     try {
-      if (userNote.content === "") {
+      if (
+        userNote.content === "" &&
+        userNote.title === "" &&
+        userNote.tags === []
+      ) {
         return setIsUserOnInput(false);
       } else {
         await addUserNote(userNote, token);
         setIsUserOnInput(false);
         setUserNote({
           title: "",
-          content: "Enter note here....",
+          content: "",
+          tags: [],
+          color: "#ffffff",
         });
       }
     } catch (error) {
@@ -94,18 +99,7 @@ const MenuBar = ({ editor, userNote, setIsUserOnInput, setUserNote }) => {
         </div>
 
         <div className="flex items-center">
-          <button
-            onClick={() => editor.chain().focus().redo().run()}
-            className="menu-bar-btn"
-          >
-            <MdOutlineColorLens className="menu-bar-icon" />
-          </button>
-          <button
-            onClick={() => editor.chain().focus().redo().run()}
-            className="menu-bar-btn"
-          >
-            <MdOutlineLabel className="menu-bar-icon" />
-          </button>
+          <ColorPalette setUserNote={setUserNote} />
           <button onClick={closeHandler} className="menu-bar-btn close-btn">
             Close
           </button>
