@@ -25,6 +25,7 @@ export const UserProvider = ({ children }) => {
   const [userNoteState, userNoteDispatch] = useReducer(userNotesReducer, {
     notes: [],
     archives: [],
+    dateSort: "ASC",
   });
 
   const getUserNotesOnInitialLoad = async (isAuthenticated, token) => {
@@ -48,6 +49,7 @@ export const UserProvider = ({ children }) => {
     try {
       const userNote = {
         ...note,
+        date: new Date(),
       };
       const res = await addNote(userNote, token);
       const data = await res.data;

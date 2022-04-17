@@ -13,6 +13,7 @@
 
 .color-palette {
   position: absolute;
+  left: -3rem;
   bottom: -2rem;
   display: flex;
   gap: 10px;

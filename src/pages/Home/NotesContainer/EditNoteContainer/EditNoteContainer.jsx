@@ -1,5 +1,4 @@
 import React from "react";
-import { MdOutlineArchive, MdDeleteOutline } from "react-icons/md";
 import "./EditNoteContainer.css";
 import { EditNoteTipTap } from "../EditNoteTipTap/EditNoteTipTap";
 import { useUser } from "../../../../context/UserContext";
@@ -52,12 +51,6 @@ const EditNoteContainer = ({ setEditNote, editNote, setIsEdit }) => {
         </div>
         <div className="edit-note-action-container">
           <ColorPalette setUserNote={setEditNote} />
-          <button className="note-action-btn">
-            <MdOutlineArchive className="note-action-icon" />
-          </button>
-          <button className="note-action-btn">
-            <MdDeleteOutline className="note-action-icon" />
-          </button>
           <button className="note-action-btn" onClick={closeHandler}>
             Close
           </button>

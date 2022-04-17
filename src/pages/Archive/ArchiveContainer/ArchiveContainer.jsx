@@ -4,6 +4,7 @@ import { MdOutlineRestore, MdDeleteOutline } from "react-icons/md";
 import "./ArchiveContainer.css";
 import { useUser } from "../../../context/UserContext";
 import { useAuth } from "../../../context/AuthContext";
+import { sortByDate } from "../../../utils/sortByDate";
 
 const ArchiveNote = ({ note }) => {
   const {
@@ -48,11 +49,11 @@ const ArchiveNote = ({ note }) => {
 
 const ArchiveContainer = () => {
   const {
-    userNoteState: { archives },
+    userNoteState: { archives, dateSort },
   } = useUser();
   return (
     <div className="archives-container">
-      {archives.map((note) => (
+      {archives.sort(sortByDate(dateSort)).map((note) => (
         <ArchiveNote note={note} key={note._id} />
       ))}
     </div>

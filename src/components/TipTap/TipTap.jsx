@@ -11,7 +11,7 @@ export const TipTap = () => {
   const [isUserOnInput, setIsUserOnInput] = useState(false);
   const [userNote, setUserNote] = useState({
     title: "",
-    content: "Enter note here....",
+    content: "",
     tags: [],
     color: "#ffffff",
   });
@@ -24,7 +24,7 @@ export const TipTap = () => {
       }),
       Underline,
     ],
-    content: userNote.content,
+    content: "",
     onUpdate: ({ editor }) => {
       const html = editor.getHTML();
       setUserNote((userNote) => ({ ...userNote, content: html }));

@@ -1,13 +1,39 @@
-import React from "react";
+import React, { useState } from "react";
 import "./NavBar.css";
-import { MdMenu, MdPersonOutline, MdLogout } from "react-icons/md";
+import {
+  MdMenu,
+  MdLogout,
+  MdKeyboardArrowDown,
+  MdKeyboardArrowUp,
+} from "react-icons/md";
 import NavIcon from "../../assets/nav-icon.png";
 import { useAuth } from "../../context/AuthContext";
+import { useUser } from "../../context/UserContext";
+import { actionTypes } from "../../reducers/actionTypes";
+const { SET_DATE_SORT_VALUE } = actionTypes;
 const NavBar = ({ setCollapse }) => {
   const {
     signout,
     auth: { isAuthenticated },
   } = useAuth();
+  const { userNoteDispatch } = useUser();
+  const [dateSortValue, setDateSortValue] = useState("ASC");
+  const dateSortHandler = () => {
+    if (dateSortValue === "ASC") {
+      setDateSortValue("DESC");
+      userNoteDispatch({
+        type: SET_DATE_SORT_VALUE,
+        payload: { dateSortValue: "DESC" },
+      });
+    } else {
+      setDateSortValue("ASC");
+      userNoteDispatch({
+        type: SET_DATE_SORT_VALUE,
+        payload: { dateSortValue: "ASC" },
+      });
+    }
+  };
+
   return (
     <nav className="navbar">
       <ul className="nav-main">
@@ -24,11 +50,22 @@ const NavBar = ({ setCollapse }) => {
           </div>
         </li>
       </ul>
-      <ul className="nav-right">
-        <li className="nav-link">
-          <MdPersonOutline className="nav-icon" />
-        </li>
-        {isAuthenticated && (
+      {isAuthenticated && (
+        <ul className="nav-right">
+          <li className="nav-link no-hover">
+            <button
+              className="date-sort-btn"
+              value={dateSortValue}
+              onClick={dateSortHandler}
+            >
+              Date{" "}
+              {dateSortValue === "ASC" ? (
+                <MdKeyboardArrowDown />
+              ) : (
+                <MdKeyboardArrowUp />
+              )}
+            </button>
+          </li>
           <li
             className="nav-link"
             onClick={(e) => {
@@ -38,8 +75,8 @@ const NavBar = ({ setCollapse }) => {
           >
             <MdLogout className="nav-icon" />
           </li>
-        )}
-      </ul>
+        </ul>
+      )}
     </nav>
   );
 };
